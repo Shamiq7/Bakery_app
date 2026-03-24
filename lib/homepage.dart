@@ -1,3 +1,4 @@
+import 'package:Bakery_app/loginpg.dart';
 import 'package:Bakery_app/models/Fooditem.dart';
 import 'package:Bakery_app/provider/Filterlogic.dart';
 import 'package:Bakery_app/widgets/HomePgCatagoryBox.dart';
@@ -19,7 +20,15 @@ class Proj1 extends StatelessWidget {
         title: Text('Breakfast', style: TextStyle(fontWeight: FontWeight.bold)),
 
         centerTitle: true,
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back)),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              (MaterialPageRoute(builder: (context) => Loginpg())),
+            );
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.settings))],
       ),
 

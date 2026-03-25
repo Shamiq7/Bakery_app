@@ -14,10 +14,13 @@ class Proj1 extends StatelessWidget {
   Widget build(BuildContext context) {
     //final provider = context.watch<CounterProvider>();
     final provider2 = context.read<CounterProvider>();
-
+    final Provider = context.watch<LoginProvider>();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Breakfast', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(
+          'Welcome ${Provider.user}',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
 
         centerTitle: true,
         leading: IconButton(

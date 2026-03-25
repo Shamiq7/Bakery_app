@@ -10,6 +10,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => CounterProvider()),
         ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_)=>LoginProvider())
       ],
       child: Myapp(),
     ),

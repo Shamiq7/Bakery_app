@@ -55,3 +55,8 @@ class cartItem {
 }
 
 // List<cartItem> cart = [];
+// class LoginPgitem {
+//   var msg = '';
+//   var user = '';
+//   LoginPgitem({required this.msg, required this.user});
+// }

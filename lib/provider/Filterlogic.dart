@@ -1,8 +1,6 @@
-
 import 'package:Bakery_app/models/Fooditem.dart';
 import 'package:flutter/material.dart';
 import 'package:Bakery_app/List.dart';
-
 
 class CounterProvider extends ChangeNotifier {
   List<Fooditem> filteredFood = fooditems;
@@ -82,5 +80,25 @@ class CartProvider extends ChangeNotifier {
     }
 
     return total;
+  }
+}
+
+class LoginProvider extends ChangeNotifier {
+  var msg = '';
+  var user = '';
+  void Login(String value) {
+    if (value.isEmpty) {
+      msg = 'Please Enter Your Name!';
+    } else {
+      user = value;
+      msg = '';
+    }
+    notifyListeners();
+  }
+
+  void reset() {
+    msg = '';
+    user = '';
+    notifyListeners();
   }
 }

@@ -1,8 +1,12 @@
 import 'package:Bakery_app/homepage.dart';
+import 'package:Bakery_app/provider/Filterlogic.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Loginpg extends StatefulWidget {
-  const Loginpg({super.key});
+
+  Loginpg({super.key});
+  
 
   @override
   State<Loginpg> createState() => _LoginpgState();
@@ -10,10 +14,19 @@ class Loginpg extends StatefulWidget {
 
 class _LoginpgState extends State<Loginpg> {
   TextEditingController controller = TextEditingController();
-  var msg = '';
-  var user = '';
+
+@override
+void initState() {
+  super.initState();
+  Future.microtask(() {
+    context.read<LoginProvider>().reset();
+  });
+}
+
   @override
   Widget build(BuildContext context) {
+    final provider1 = context.read<LoginProvider>();
+    final provider2 = context.watch<LoginProvider>();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -48,9 +61,16 @@ class _LoginpgState extends State<Loginpg> {
                       padding: EdgeInsetsGeometry.fromLTRB(20, 200, 20, 100),
                       child: Column(
                         children: [
-                          Text('Welcome $user', style: TextStyle(fontSize: 20)),
+                          Text(
+                            'Welcome ${provider2.user}',
+                            style: TextStyle(fontSize: 20),
+                          ),
                           SizedBox(height: 5),
+
                           TextField(
+                            // onChanged: (value) {
+                            //   provider1.Login(value);
+                            // },
                             controller: controller,
                             decoration: InputDecoration(
                               hintText: 'Enter Your Name',
@@ -77,27 +97,25 @@ class _LoginpgState extends State<Loginpg> {
                           SizedBox(height: 20),
                           ElevatedButton(
                             onPressed: () async {
-                              var title = controller.text;
-                              if (title.isEmpty) {
-                                msg = 'Please Enter Your Name!';
-                                setState(() {});
-                              } else {
-                                user = controller.text;
-                                msg = '';
-                                setState(() {});
-                                await Future.delayed(Duration(seconds: 2));
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Proj1(),
-                                  ),
-                                );
+                              provider1.Login(controller.text);
+                              if (provider1.user.isEmpty) {
+                                return;
                               }
+                           
+                              await Future.delayed(Duration(seconds: 1));
+                                 
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Proj1(),
+                                ),
+                              );
+                          
                             },
                             child: Text('Login'),
                           ),
                           SizedBox(height: 95),
-                          Text(msg, style: TextStyle(fontSize: 20)),
+                          Text(provider2.msg, style: TextStyle(fontSize: 20)),
                         ],
                       ),
                     ),

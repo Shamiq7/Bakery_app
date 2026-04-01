@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Loginpg extends StatefulWidget {
-
-  Loginpg({super.key});
-  
+  const Loginpg({super.key});
 
   @override
   State<Loginpg> createState() => _LoginpgState();
@@ -15,13 +13,25 @@ class Loginpg extends StatefulWidget {
 class _LoginpgState extends State<Loginpg> {
   TextEditingController controller = TextEditingController();
 
-@override
-void initState() {
-  super.initState();
-  Future.microtask(() {
-    context.read<LoginProvider>().reset();
-  });
-}
+  @override
+  void initState() {
+    super.initState();
+
+    Future.microtask(() {
+      context.read<LoginProvider>().reset();
+    });
+  }
+  // @override
+  // void delay() {
+  //   // TODO: implement ==
+  //    context.read()<LoginProvider>.
+  // }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +47,12 @@ void initState() {
         backgroundColor: Color(0Xff92A3FD),
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: Container(
-                height: double.infinity,
-                width: double.infinity,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(color: Color(0Xff92A3FD)),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(40, 50, 40, 150),
@@ -60,6 +70,7 @@ void initState() {
                     child: Padding(
                       padding: EdgeInsetsGeometry.fromLTRB(20, 200, 20, 100),
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
                             'Welcome ${provider2.user}',
@@ -97,22 +108,30 @@ void initState() {
                           SizedBox(height: 20),
                           ElevatedButton(
                             onPressed: () async {
-                              provider1.Login(controller.text);
-                              if (provider1.user.isEmpty) {
+                              bool success = provider1.Login(controller.text);
+                              if (!success) {
                                 return;
                               }
-                           
-                              await Future.delayed(Duration(seconds: 1));
-                                 
+                              await provider1.delay();
+
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => Proj1(),
                                 ),
                               );
-                          
                             },
-                            child: Text('Login'),
+                            child: provider1.isLoading
+                                ? SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(
+                                      strokeAlign: 2.0,
+                                      strokeWidth: 2,
+                                      color: Colors.black,
+                                    ),
+                                  )
+                                : Text('Login'),
                           ),
                           SizedBox(height: 95),
                           Text(provider2.msg, style: TextStyle(fontSize: 20)),
@@ -122,8 +141,8 @@ void initState() {
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -86,19 +86,31 @@ class CartProvider extends ChangeNotifier {
 class LoginProvider extends ChangeNotifier {
   var msg = '';
   var user = '';
-  void Login(String value) {
+  bool isLoading = false;
+  bool Login(String value) {
     if (value.isEmpty) {
       msg = 'Please Enter Your Name!';
+      notifyListeners();
+      return false;
     } else {
       user = value;
       msg = '';
+      notifyListeners();
+      return true;
     }
-    notifyListeners();
   }
 
   void reset() {
     msg = '';
     user = '';
+    notifyListeners();
+  }
+
+  Future<void> delay() async {
+    isLoading = true;
+    notifyListeners();
+    await Future.delayed(Duration(seconds: 2));
+    isLoading = false;
     notifyListeners();
   }
 }

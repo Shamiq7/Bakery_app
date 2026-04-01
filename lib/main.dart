@@ -1,5 +1,5 @@
-import 'package:Bakery_app/loginpg.dart';
 import 'package:Bakery_app/provider/Filterlogic.dart';
+import 'package:Bakery_app/test.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,7 +10,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => CounterProvider()),
         ChangeNotifierProvider(create: (_) => CartProvider()),
-        ChangeNotifierProvider(create: (_)=>LoginProvider())
+        ChangeNotifierProvider(create: (_) => LoginProvider()),
       ],
       child: Myapp(),
     ),
@@ -22,6 +22,6 @@ class Myapp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: Loginpg());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: Testpage());
   }
 }

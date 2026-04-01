@@ -17,9 +17,15 @@ class Proj1 extends StatelessWidget {
     final Provider = context.watch<LoginProvider>();
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Welcome ${Provider.user}',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Wrap(
+          // alignment: WrapAlignment.spaceBetween,
+          // textDirection: TextDirection.ltr,
+          children: [
+            Text(
+              'Welcome ${Provider.user}',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ],
         ),
 
         centerTitle: true,

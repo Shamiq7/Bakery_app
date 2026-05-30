@@ -1,4 +1,4 @@
-# blinkit_clone
+# Bakery_app
 
 A new Flutter project.
 

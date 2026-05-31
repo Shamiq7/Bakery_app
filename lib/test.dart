@@ -1,5 +1,3 @@
-import 'package:Bakery_app/homepage.dart';
-import 'package:Bakery_app/viewcart.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
@@ -149,7 +147,7 @@ class _TestpageState extends State<Testpage> {
 
               //
               //
-              Container(
+              SizedBox(
                 width: 360,
                 child: TextFormField(
                   decoration: InputDecoration(
